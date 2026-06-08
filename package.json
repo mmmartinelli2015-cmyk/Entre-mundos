@@ -1,0 +1,16 @@
+{
+  "name": "rd-webhook-campanha",
+  "version": "1.0.0",
+  "main": "Server2.js",
+  "type": "module",
+  "scripts": {
+    "start": "node Server2.js",
+    "dev": "node Server2.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.19.0",
+    "node-fetch": "^3.3.2"
+  }
+}
