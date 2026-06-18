@@ -1,4 +1,4 @@
-// server.js
+// Server2.js
 import express from 'express';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
@@ -216,7 +216,7 @@ app.get('/auth/rd/callback', async (req, res) => {
   }
 });
 
-// refresh token
+// refresh token — CORRIGIDO ✅
 app.post('/auth/rd/refresh', async (req, res) => {
   try {
     const { refresh_token } = req.body;
@@ -228,7 +228,7 @@ app.post('/auth/rd/refresh', async (req, res) => {
       });
     }
 
-    const tokenResponse = await fetch('http://localhost:3001/auth/rd/callback?code=75b3682b3abef83f5f1850d226e2a49a', {
+    const refreshResponse = await fetch(`${RD_OAUTH_TOKEN_URL}?token_by=refresh_token`, {
       method: 'POST',
       headers: {
         accept: 'application/json',
@@ -430,21 +430,21 @@ app.post('/rdstation-webhook-campanha', async (req, res) => {
     console.log('✅ Depois findOrganizationByCnpj.');
 
     const organizationCustomFields = [
-      buildCustomField('69b1c5f1473b730016d41971', razaoSocial),         // Razão Social
-      buildCustomField('69b1c5f75ea3200016f49791', nomeFantasia),       // Nome Fantasia
-      buildCustomField('69b1c6040143ed00183457da', cnpj),               // CNPJ
-      buildCustomField('69b1c672a433580013d56a20', endereco),           // Endereço
-      buildCustomField('69b1d0286520a80020939657', numero),             // Número
-      buildCustomField('68ef934223f4b30014fd1ffd', bairro),             // Bairro
-      buildCustomField('68ef9349528c560019741cc4', cidade),             // Cidade
-      buildCustomField('69c189f58ae16600131fc9ac', estadoFinal),        // Estado
-      buildCustomField('69b1c68705e89500133632dc', cep),                // CEP
-      buildCustomField('69bc03a3f67e550016a1b98e', telefone),           // Telefone
-      buildCustomField('68ef934c752228001c5ef627', email),              // E-mail
-      buildCustomField('69b1c6a33068d1001cb0823f', representanteLegal), // Nome Representante
-      buildCustomField('69b1c62d459e5400184503dc', cpfRepresentante),   // CPF Representante
-      buildCustomField('69b1c6451eb5e50021d115b7', rgRepresentante),    // RG Representante
-      buildCustomField('69c7ec9d7080a10014eb9060', opcaoCampanha)       // Campanha
+      buildCustomField('69b1c5f1473b730016d41971', razaoSocial),
+      buildCustomField('69b1c5f75ea3200016f49791', nomeFantasia),
+      buildCustomField('69b1c6040143ed00183457da', cnpj),
+      buildCustomField('69b1c672a433580013d56a20', endereco),
+      buildCustomField('69b1d0286520a80020939657', numero),
+      buildCustomField('68ef934223f4b30014fd1ffd', bairro),
+      buildCustomField('68ef9349528c560019741cc4', cidade),
+      buildCustomField('69c189f58ae16600131fc9ac', estadoFinal),
+      buildCustomField('69b1c68705e89500133632dc', cep),
+      buildCustomField('69bc03a3f67e550016a1b98e', telefone),
+      buildCustomField('68ef934c752228001c5ef627', email),
+      buildCustomField('69b1c6a33068d1001cb0823f', representanteLegal),
+      buildCustomField('69b1c62d459e5400184503dc', cpfRepresentante),
+      buildCustomField('69b1c6451eb5e50021d115b7', rgRepresentante),
+      buildCustomField('69c7ec9d7080a10014eb9060', opcaoCampanha)
     ].filter(Boolean);
 
     if (existingOrg) {
